@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Countdown Timer</title>
+    <link rel="stylesheet" href="style.css" </head>
+
+    <body>
+        <div class="container">
+
+            <h1>Janani's Birthday</h1>
+            <div id="countdown">00:00:00</div>
+        </div>
+
+        <script>
+            // Set the countdown date and time
+            const countdownDate = new Date("2023-09-16T23:59:59").getTime();
+
+            // Update the countdown every second
+            const countdown = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countdownDate - now;
+
+                // Calculations for days, hours, minutes, and seconds
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the countdown
+                document.getElementById("countdown").textContent = `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                // If the countdown is finished, display a message
+                if (distance < 0) {
+                    clearInterval(countdown);
+                    document.getElementById("countdown").textContent = "EXPIRED";
+                }
+            }, 1000);
+        </script>
+    </body>
+
+</html>
